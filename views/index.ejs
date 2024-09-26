@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>BooksNotes</title>
+</head>
+
+<style>
+    .stars {
+        color: gold; /* Color for filled stars */
+    }
+    .star {
+        font-size: 20px; /* Adjust size of stars */
+    }
+    .hidden {
+        display: none;
+    }
+    .editable {
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+    }
+    .edit-button {
+        top: 0;
+        right: 5%;
+        position: absolute;
+    }
+</style>
+<body>
+    <nav>
+        <ul>
+            <li>
+                <form action="/postData" method="post">
+                    <button type="submit">Add books</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    
+    <h1 class="title-holder"><%= title %></h1>
+    <div class="content-container">
+        <% bookData.forEach((book) => { %>
+            <div class="card">
+                <div class="card-left">
+                    <img src="https://covers.openlibrary.org/b/id/<%= book.cover_id %>-L.jpg" alt="Cover of <%= book.title %>" class="card-image">
+                    <label for="" class="author">Author:</label>
+                    <span class="stars card-rating">
+                        <% for (let i = 1; i <= 5; i++) { %>
+                            <span class="star">
+                                <%= book.rating >= i ? '★' : '☆' %>
+                            </span>
+                        <% } %>
+                    </span>
+                </div>
+                <form action="/update" method="post" class="card-right">
+                    <input type="text" name="id" value="<%= book.id %>" hidden>
+                    <input type="text" class="card-title" name="title" value="<%= book.title %>" hidden>
+                    <h2 id="full-title" class="card-title"></h2>
+                    <label for="">Summary:</label><br>
+                    <input type="text" class="card-summary" name="summary" value="<%= book.summary %>" hidden>
+                    <p class="full-summary card-summary"></p>
+                    <button type="button" class="edit-button" onclick="toggleEdit(this)"><span class="material-symbols-outlined">
+                        edit
+                        </span>
+                    </button>
+                    <button type="submit" class="save-button" hidden><span class="material-symbols-outlined">
+                        check
+                        </span>
+                    </button>
+                </form>
+                <form action="/delete" method="post">
+                    <input type="text" name="id" value="<%= book.id %>" hidden>
+                    <button type="submit" class="delete-button"><span class="material-symbols-outlined">
+                        delete
+                        </span></button> 
+                </form>                
+            </div><br>
+        <% }) %>
+    </div>
+    
+    <script>
+        document.querySelectorAll('.card').forEach(card => {
+            const title = card.querySelector('.card-title[name="title"]');
+            const input = card.querySelector('.card-summary[name="summary"]');
+            const fullTitle = card.querySelector('#full-title');
+            const fullSummary = card.querySelector('.full-summary');
+            
+            fullTitle.textContent = title.value;
+            fullSummary.textContent = input.value;
+        });
+    
+        function toggleEdit(button) {
+            const card = button.closest('.card');
+            const summaryInput = card.querySelector('.card-summary[name="summary"]');
+            const fullSummary = card.querySelector('.full-summary');
+            const titleInput = card.querySelector('.card-title[name="title"]');
+            const fullTitle = card.querySelector('#full-title');
+            const saveButton = card.querySelector('.save-button');
+    
+            if (summaryInput.hidden) {
+                summaryInput.hidden = false; 
+                fullSummary.hidden = true;   
+                fullTitle.hidden = true;    // Hide the full title
+                titleInput.hidden = false;   // Show the title input
+                button.hidden = true;        // Hide the edit button
+                saveButton.hidden = false;   // Show the save button
+            } else {
+                summaryInput.hidden = true;  
+                fullSummary.hidden = false;   
+                fullTitle.hidden = false;     // Show the full title
+                titleInput.hidden = true;     // Hide the title input
+                button.hidden = false;        // Show the edit button
+                saveButton.hidden = true;     // Hide the save button
+            }
+        }
+    </script>
+</body>
+</html>

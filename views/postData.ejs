@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>BookNotes</title>
+</head>
+<body class="postData">
+    <h1 class="titleHeader">Add the Books</h1>
+    <form action="/add" method="post" id="formdata">
+        <label for="title">Book Title:</label>
+        <input type="text" name="title" placeholder="Enter the book title here" required>
+        
+        <label for="summary">Summary:</label>
+        <textarea name="summary" placeholder="Enter the summary of the book" required></textarea>
+        
+        <label for="rating">Rating:</label>
+        <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5">
+            <label for="star5">5 stars</label>
+            
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4">4 stars</label>
+            
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3">3 stars</label>
+            
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2">2 stars</label>
+            
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1">1 star</label>
+        </div>
+        
+        <input type="submit" class="submitBtn" value="Add Book">
+    </form>
+    
+</body>
+</html>

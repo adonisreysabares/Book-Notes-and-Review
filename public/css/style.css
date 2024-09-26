@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body{
+    font-family: "Open Sans", sans-serif;
+}
+
+.postData {
+    background-color: #252525;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.titleHeader {
+    font-size: 50px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#formdata {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 60px;
+}
+
+#formdata > label {
+    color: #fff;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+#formdata input[type="text"],
+#formdata textarea {
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+}
+
+#formdata input[type="text"]:focus,
+#formdata textarea:focus {
+    outline: none;
+    border-color: #ffcc00; /* Change this to your preferred color */
+}
+
+.submitBtn {
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffcc00; /* Button color */
+    color: #252525;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitBtn:hover {
+    background-color: #e6b800; /* Darker shade on hover */
+}
+
+.rating {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.rating input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.rating label {
+    background-color: #ffcc00; /* Star color */
+    padding: 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.rating input[type="radio"]:checked + label {
+    background-color: #e6b800; /* Darker shade when selected */
+}
+
